@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Search - StockPred  </title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<!-- Latest compiled JavaScript -->
+
+<style>
+
+   #myInput {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px; }
+
+
+
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container">
+    <a class="navbar-brand" href="/"><h4><i>StockPred</i></h4></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 ms-auto mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="/">Home</a>
+        </li>
+
+          {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="">Check Predictions</a>
+        </li>
+          {% endif %}
+         <li class="nav-item">
+          <a class="nav-link" href="/stock_analysis">Stock Analysis Guide</a>
+        </li>
+      </ul>
+
+      <div class="d-grid gap-2 d-md-block">
+        {% if current_user.is_authenticated %}
+        <a href="/logout" class="btn btn-outline-dark"  role="button">Logout</a>
+        {% else %}
+        <a href="/login" class="btn btn-outline-dark"  role="button">Login</a>
+        <a href="/signup" class="btn btn-outline-dark"  role="button">Signup</a>
+        {% endif %}
+
+    </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    <br>
+    <h2>Search for any Nifty50 Stock</h2>
+    <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Enter the name of the company" id="myinput" onkeyup="myFunction()">
+    <span class="input-group-text"><i class="bi bi-search"></i></span>
+    </div>
+
+  <table border="1" class="table table-hover" id="mytable">
+  <thead>
+  <tr>
+    <th>Company Name</th>
+    <th>Industry</th>
+    <th>Symbol</th>
+    <th>ISIN Code</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr>
+    <td>Adani Ports and Special Economic Zone Ltd.</td>
+    <td>Services</td>
+    <td>ADANIPORTS</td>
+    <td>INE742F01042</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/adani_ports">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Apollo Hospitals Enterprise Ltd.</td>
+    <td>Healthcare</td>
+    <td>APOLLOHOSP</td>
+    <td>INE437A01024</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/apollo_hospitals">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Asian Paints Ltd.</td>
+    <td>Consumer Durables</td>
+    <td>ASIANPAINT</td>
+    <td>INE021A01026</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/asian_paints">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Axis Bank Ltd.</td>
+    <td>Financial Services</td>
+    <td>AXISBANK</td>
+    <td>INE238A01034</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/axis_bank">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Bajaj Auto Ltd.</td>
+    <td>Automobile and Auto Components</td>
+    <td>BAJAJ-AUTO</td>
+    <td>INE917I01010</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/bajaj_auto">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Bajaj Finance Ltd.</td>
+    <td>Financial Services</td>
+    <td>BAJFINANCE</td>
+    <td>INE296A01024</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/bajaj_finance">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Bajaj Finserv Ltd.</td>
+    <td>Financial Services</td>
+    <td>BAJAJFINSV</td>
+    <td>INE918I01018</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/bajaj_finserv">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Bharat Petroleum Corporation Ltd.</td>
+    <td>Oil Gas &amp; Consumable Fuels</td>
+    <td>BPCL</td>
+    <td>INE029A01011</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/bharat_petroleum">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Bharti Airtel Ltd.</td>
+    <td>Telecommunication</td>
+    <td>BHARTIARTL</td>
+    <td>INE397D01024</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/bharti_airtel">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Britannia Industries Ltd.</td>
+    <td>Fast Moving Consumer Goods</td>
+    <td>BRITANNIA</td>
+    <td>INE216A01030</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/britannia">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Cipla Ltd.</td>
+    <td>Healthcare</td>
+    <td>CIPLA</td>
+    <td>INE059A01026</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/cipla">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Coal India Ltd.</td>
+    <td>Oil Gas &amp; Consumable Fuels</td>
+    <td>COALINDIA</td>
+    <td>INE522F01014</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/coal_india">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Divi's Laboratories Ltd.</td>
+    <td>Healthcare</td>
+    <td>DIVISLAB</td>
+    <td>INE361B01024</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/divis_lab">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Dr. Reddy's Laboratories Ltd.</td>
+    <td>Healthcare</td>
+    <td>DRREDDY</td>
+    <td>INE089A01023</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/drreddy_labs">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Eicher Motors Ltd.</td>
+    <td>Automobile and Auto Components</td>
+    <td>EICHERMOT</td>
+    <td>INE066A01021</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/eicher_motors">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Grasim Industries Ltd.</td>
+    <td>Construction Materials</td>      <td>GRASIM</td>/search
+    <td>INE047A01021</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/grasim_industries">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>HCL Technologies Ltd.</td>
+    <td>Information Technology</td>      <td>HCLTECH</td>
+    <td>INE860A01027</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/hcl_tech">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>HDFC Bank Ltd.</td>
+    <td>Financial Services</td>      <td>HDFCBANK</td>
+    <td>INE040A01034</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/hdfc_bank">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>HDFC Life Insurance Ltd.</td>
+    <td>Financial Services</td>      <td>HDFCLIFE</td>      <td>INE795G01014</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/hdfc_life">Check Prediction</a></td>
+  </tr>
+
+  <tr>      
+    <td>Hero MotoCorp Ltd.</td>   
+    <td>Automobile and Auto Components</td>      <td>HEROMOTOCO</td>      <td>INE158A01026</td>   
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/hero_motocorp">Check Prediction</a></td>
+  </tr>
+
+  <tr>
+    <td>Hindalco Industries Ltd.</td>
+    <td>Metals &amp; Mining</td>      <td>HINDALCO</td>      <td>INE038A01020</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/hindalco_industries">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>Hindustan Unilever Ltd.</td>
+    <td>Fast Moving Consumer Goods</td>
+    <td>HINDUNILVR</td>      <td>INE030A01027</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/hul">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>Housing Development Finance Corporation Ltd.</td>
+    <td>Financial Services</td>      <td>HDFC</td>
+    <td>INE001A01036</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/hdfc">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>ICICI Bank Ltd.</td>      <td>Financial Services</td>      <td>ICICIBANK</td>
+    <td>INE090A01021</td>  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/icici_bank">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>ITC Ltd.</td>      <td>Fast Moving Consumer Goods</td>      <td>ITC</td>
+    <td>INE154A01025</td><td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/itc_ltd">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>IndusInd Bank Ltd.</td>      <td>Financial Services</td>      <td>INDUSINDBK</td>
+    <td>INE095A01012</td> <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/induslnd_bank">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>Infosys Ltd.</td>      <td>Information Technology</td>
+    <td>INFY</td>      <td>INE009A01021</td><td>
+      <a class="btn btn-sm btn-outline-dark" role="button" href="/search/infosys_ltd">Check Prediction</a></td>    </tr>
+
+  <tr>      <td>JSW Steel Ltd.</td>      <td>Metals &amp; Mining</td>      <td>JSWSTEEL</td>
+    <td>INE019A01038</td><td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/jsw_steel">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>Kotak Mahindra Bank Ltd.</td>      <td>Financial Services</td>      <td>KOTAKBANK</td>
+    <td>INE237A01028</td><td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/kotak_mahindra">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>Larsen &amp; Toubro Ltd.</td>      <td>Construction</td>
+    <td>LT</td>      <td>INE018A01030</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/larsen_toubro">Check Prediction</a></td>   </tr>
+
+  <tr>      <td>Mahindra &amp; Mahindra Ltd.</td>      <td>Automobile and Auto Components</td>
+    <td>M&amp;M</td>      <td>INE101A01026</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/mahindra_auto">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>Maruti Suzuki India Ltd.</td>      <td>Automobile and Auto Components</td>
+    <td>MARUTI</td>      <td>INE585B01010</td><td>
+      <a class="btn btn-sm btn-outline-dark" role="button" href="/search/maruti_suzuki">Check Prediction</a></td>    </tr>
+
+
+  <tr>      <td>NTPC Ltd.</td>      <td>Power</td>      <td>NTPC</td>      <td>INE733E01010</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/ntpc_ltd">Check Prediction</a></td></tr>
+
+  <tr>      <td>Nestle India Ltd.</td>      <td>Fast Moving Consumer Goods</td>      <td>NESTLEIND</td>
+    <td>INE239A01016</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/nestle_india">Check Prediction</a></td>  </tr>
+
+  <tr>      <td>Oil &amp; Natural Gas Corporation Ltd.</td>      <td>Oil Gas &amp; Consumable Fuels</td>
+    <td>ONGC</td>      <td>INE213A01029</td><td>
+      <a class="btn btn-sm btn-outline-dark" role="button" href="/search/ongc">Check Prediction</a></td>    </tr>
+
+  <tr>      <td>Power Grid Corporation of India Ltd.</td>      <td>Power</td>
+    <td>POWERGRID</td>      <td>INE752E01010</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/power_grid">Check Prediction</a></td></tr>
+
+  <tr>      <td>Reliance Industries Ltd.</td>      <td>Oil Gas &amp; Consumable Fuels</td>      <td>RELIANCE</td>
+    <td>INE002A01018</td><td>
+      <a class="btn btn-sm btn-outline-dark" role="button" href="/search/reliance_industries">Check Prediction</a></td>    </tr>
+
+  <tr>      <td>SBI Life Insurance Company Ltd.</td>      <td>Financial Services</td>      <td>SBILIFE</td>
+    <td>INE123W01016</td><td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/sbi_life">
+      Check Prediction
+    </a></td>    </tr>
+
+  <tr>      <td>Shree Cement Ltd.</td>      <td>Construction Materials</td>      <td>SHREECEM</td>
+    <td>INE070A01015</td><td>
+      <a class="btn btn-sm btn-outline-dark" role="button" href="/search/shree_cement">Check Prediction</a></td>    </tr>
+
+  <tr>      <td>State Bank of India</td>      <td>Financial Services</td>      <td>SBIN</td>
+    <td>INE062A01020</td><td>
+      <a class="btn btn-sm btn-outline-dark" role="button" href="/search/state_bank_india">Check Prediction</a></td>    </tr>
+
+  <tr>      <td>Sun Pharmaceutical Industries Ltd.</td>      <td>Healthcare</td>      <td>SUNPHARMA</td>
+    <td>INE044A01036</td><td>
+      <a class="btn btn-sm btn-outline-dark" role="button" href="/search/sun_pharma">Check Prediction</a></td>    </tr>
+
+  <tr>      <td>Tata Consultancy Services Ltd.</td>      <td>Information Technology</td>      <td>TCS</td>
+    <td>INE467B01029</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/tcs">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>Tata Consumer Products Ltd.</td>
+    <td>Fast Moving Consumer Goods</td>      <td>TATACONSUM</td>      <td>INE192A01025</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/tata_consumer">Check Prediction</a></td></tr>
+
+  <tr>      <td>Tata Motors Ltd.</td>      <td>Automobile and Auto Components</td>
+    <td>TATAMOTORS</td>      <td>INE155A01022</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/tata_motors">Check Prediction</a></td></tr>
+
+  <tr>      <td>Tata Steel Ltd.</td>      <td>Metals &amp; Mining</td>      <td>TATASTEEL</td>
+    <td>INE081A01012</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/tata_steel">Check Prediction</a></td>   </tr>
+
+  <tr>      <td>Tech Mahindra Ltd.</td>      <td>Information Technology</td>      <td>TECHM</td>
+    <td>INE669C01036</td>
+    <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/tech_mahindra">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>Titan Company Ltd.</td>      <td>Consumer Durables</td>      <td>TITAN</td>
+    <td>INE280A01028</td><td>
+      <a class="btn btn-sm btn-outline-dark" role="button" href="/search/titan_company">Check Prediction</a></td>
+  </tr>
+
+  <tr>      <td>UPL Ltd.</td>      <td>Chemicals</td>      <td>UPL</td>
+    <td>INE628A01036</td> <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/upl_ltd">Check Prediction</a></td>   </tr>
+
+  <tr>      <td>UltraTech Cement Ltd.</td>      <td>Construction Materials</td>      <td>ULTRACEMCO</td>
+    <td>INE481G01011</td><td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/ultratech_cement">Check Prediction</a></td>    </tr>
+
+  <tr>
+    <td>Wipro Ltd.</td>
+    <td>Information Technology</td>
+    <td>WIPRO</td>
+    <td>INE075A01022</td>
+  <td><a class="btn btn-sm btn-outline-dark" role="button" href="/search/wipro">Check Prediction</a></td>
+  </tr>
+
+
+  </tbody>
+</table>
+
+</div>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myinput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("mytable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>
+
+
+
